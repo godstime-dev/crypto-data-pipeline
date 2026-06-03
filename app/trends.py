@@ -27,7 +27,7 @@ def calculate_volatility(prices):
     returns = [
         (prices[i] - prices[i - 1]) / prices[i - 1]
         for i in range(1, len(prices))
-    ]
+        ]
     return statistics.pstdev(returns)
 
 
@@ -48,4 +48,4 @@ def get_market_signal(prices):
         "trend": calculate_trend_signal(prices),
         "volatility": calculate_volatility(prices),
         "momentum": calculate_momentum(prices)
-    }
+        }

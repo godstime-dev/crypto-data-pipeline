@@ -1,7 +1,7 @@
 import time
 import requests
 from threading import Lock
-
+from app.monitor import log_info, log_error
 from app.config import (
     API_URL,
     RETRY_COUNT,
@@ -9,21 +9,18 @@ from app.config import (
     API_MIN_INTERVAL_SECONDS
     )
 
-from app.monitor import log_info, log_error
-
 
 _api_lock = Lock()
 _last_api_call = 0
 
 
 def fetch_crypto_prices():
-
     global _last_api_call
 
     params = {
         "ids": "bitcoin,ethereum",
         "vs_currencies": "usd"
-    }
+        }
 
     # RATE LIMIT PROTECTION
     with _api_lock:
@@ -34,9 +31,7 @@ def fetch_crypto_prices():
 
         _last_api_call = time.time()
 
-    # RETRY LOGIC
     for attempt in range(RETRY_COUNT):
-
         try:
             response = requests.get(API_URL, params=params, timeout=10)
 

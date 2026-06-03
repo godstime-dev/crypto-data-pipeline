@@ -1,4 +1,4 @@
-from app.config import SLEEP_INTERVAL_SECONDS, init_dirs
+from app.config import SLEEP_INTERVAL_SECONDS
 from app.database import create_table
 from app.pipeline import run_pipeline
 from app.scheduler import start_scheduler
@@ -9,9 +9,7 @@ def main():
     """
     Entry point for the crypto pipeline system.
     """
-
     try:
-        init_dirs()
         create_table()
 
         log_info("Executing immediate startup data fetch...")

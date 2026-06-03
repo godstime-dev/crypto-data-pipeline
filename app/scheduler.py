@@ -31,7 +31,6 @@ def start_scheduler():
     """
     Starts a safe, non-overlapping blocking scheduler.
     """
-
     scheduler = BlockingScheduler()
 
     scheduler.add_job(
@@ -42,9 +41,7 @@ def start_scheduler():
         coalesce=True
         )
 
-    log_info(
-        f"Scheduler started - running every {SLEEP_INTERVAL_SECONDS} seconds"
-        )
+    log_info(f"Scheduler started - running every {SLEEP_INTERVAL_SECONDS} seconds")
 
     try:
         scheduler.start()

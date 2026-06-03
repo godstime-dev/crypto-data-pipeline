@@ -58,8 +58,8 @@ def update_alert_state(coin, timestamp):
             INSERT INTO alert_state (coin, last_alert_time)
             VALUES (?, ?)
             ON CONFLICT(coin)
-            DO UPDATE SET last_alert_time = excluded.last_alert_time
-        """, (coin, timestamp))
+            DO UPDATE SET last_alert_time = excluded.last_alert_time""", 
+            (coin, timestamp))
         conn.commit()
 
 def get_last_alert_time(coin):
@@ -85,8 +85,8 @@ def get_recent_prices(coin, limit=5):
             FROM prices
             WHERE coin = ?
             ORDER BY timestamp DESC
-            LIMIT ?
-        """, (coin, limit))
+            LIMIT ?""", 
+            (coin, limit))
 
         rows = cursor.fetchall()
 

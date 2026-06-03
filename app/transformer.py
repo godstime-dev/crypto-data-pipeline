@@ -6,7 +6,6 @@ def transform_crypto_data(api_response):
     """
     Transforms nested API response into a flat database-ready structure.
     """
-
     transformed_data = []
     skipped = 0
 
@@ -23,7 +22,7 @@ def transform_crypto_data(api_response):
             "coin": coin_name,
             "price_usd": usd_price,
             "timestamp": datetime.now(timezone.utc).isoformat()
-        }
+            }
 
         transformed_data.append(transformed_record)
 

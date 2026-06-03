@@ -1,8 +1,6 @@
 import logging
 import requests
-
 from app.config import LOG_FILE, LOG_LEVEL, DISCORD_WEBHOOK_URL
-
 
 def send_discord_alert(message: str):
     """

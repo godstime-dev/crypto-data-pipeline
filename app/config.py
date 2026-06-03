@@ -7,13 +7,12 @@ DATA_DIR = BASE_DIR.parent / "data"
 LOG_DIR = BASE_DIR.parent / "logs"
 
 # DIRECTORIES
-def init_dirs():
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    LOG_DIR.mkdir(parents=True, exist_ok=True)
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 # API CONFIG
 API_URL = "https://api.coingecko.com/api/v3/simple/price"
-COINS = "bitcoin, ethereum"
+COINS = "bitcoin,ethereum"
 CURRENCY = "usd"
 
 # PIPELINE CONFIG
