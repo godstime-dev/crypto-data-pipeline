@@ -95,7 +95,7 @@ Triggers Discord notifications when:
 ---
 
 # Alert Logic
- ALERT 
+ ## ALERT 
 BITCOIN moved +2.45%
 Trend: UPTREND
 Price: $66,000 → $67,600
@@ -161,6 +161,6 @@ Built as portfolio project for Junior Python Automation / Data Engineering roles
 
 # Why this project matters
 This project simulates a real-world automated data pipeline system, similar in structure to systems used in:
-• fintech monitoring tools
-• trading data pipelines
-• real-time analytics services
+- fintech monitoring tools
+- trading data pipelines
+- real-time analytics services
