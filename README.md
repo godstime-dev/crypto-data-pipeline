@@ -113,7 +113,7 @@ The system computes:
 # Setup & Installation
 
 ```bash
- git clone https://github.com/your-username/crypto-pipeline.git
+ git clone https://github.com/godstime-dev/crypto-data-pipeline.git
  cd crypto-pipeline
  pip install -r requirements.txt
  python launch.py
