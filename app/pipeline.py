@@ -4,7 +4,7 @@ from app.validator import validate_price_data
 from app.transformer import transform_crypto_data
 from app.trends import get_market_signal
 from app.database import (
-    insert_price,
+    insert_market_data,
     get_latest_price,
     get_last_alert_time,
     update_alert_state,
@@ -32,12 +32,11 @@ def run_pipeline():
         for record in records:
             coin = record["coin"]
             new_price = record["price_usd"]
-            timestamp = record["timestamp"]
 
             last_price = get_latest_price(coin)
 
             if last_price is None:
-                insert_price(coin, new_price, timestamp)
+                insert_market_data(record)
                 log_info(f"Inserted {coin} ${new_price:,.2f}")
                 continue
 
@@ -68,9 +67,7 @@ def run_pipeline():
             # ALERT COOLDOWN
             last_time_raw = get_last_alert_time(coin)
 
-            last_time = (
-                datetime.fromisoformat(last_time_raw)
-                if last_time_raw else None)
+            last_time = last_time_raw
 
             cooldown_passed = (
                 last_time is None or
@@ -81,7 +78,7 @@ def run_pipeline():
 
                 alert_msg = (
                     f" ALERT \n"
-                    f"{coin.upper()} moved {sign}{change_percent:.2f}%\n"
+                    f"{coin.upper()} {direction} {sign}{change_percent:.2f}%\n"
                     f"Trend: {trend}\n"
                     f"Price: ${last_price:,.2f} → ${new_price:,.2f}")
 
@@ -91,7 +88,7 @@ def run_pipeline():
                 update_alert_state(coin, now.isoformat())
 
 
-            insert_price(coin, new_price, timestamp)
+            insert_market_data(record)
 
             log_info(f"Inserted {coin} ${new_price:,.2f}")
 
