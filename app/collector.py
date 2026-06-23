@@ -8,14 +8,14 @@ from app.config import (
     RETRY_BACKOFF_SECONDS,
     API_MIN_INTERVAL_SECONDS,
     COINS
-    )
-
+)
 
 _api_lock = Lock()
 _last_api_call = 0
 
 
 def fetch_crypto_prices():
+    
     global _last_api_call
 
     params = {
@@ -29,10 +29,8 @@ def fetch_crypto_prices():
     # RATE LIMIT PROTECTION
     with _api_lock:
         now = time.time()
-
         if now - _last_api_call < API_MIN_INTERVAL_SECONDS:
             time.sleep(API_MIN_INTERVAL_SECONDS - (now - _last_api_call))
-
         _last_api_call = time.time()
 
     for attempt in range(RETRY_COUNT):
