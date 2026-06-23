@@ -12,17 +12,17 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 # API CONFIG
 API_URL = "https://api.coingecko.com/api/v3/simple/price"
-COINS = "bitcoin,ethereum"
+COINS = ["bitcoin", "ethereum", "solana", "ripple", "dogecoin"]
 CURRENCY = "usd"
 
 # PIPELINE CONFIG
-SLEEP_INTERVAL_SECONDS = 300
+CANDLE_INTERVAL_HOURS = 4
 RETRY_COUNT = 5
 RETRY_BACKOFF_SECONDS = 2
-ALERT_COOLDOWN_SECONDS = 300
+ALERT_COOLDOWN_SECONDS = 14400
 API_MIN_INTERVAL_SECONDS = 15
 
-DB_NAME = str(DATA_DIR / "crypto.db")
+DB_NAME = str(DATA_DIR / "crypto.duckdb")
 LOG_FILE = str(LOG_DIR / "pipeline.log")
 
 LOG_LEVEL = "INFO"
