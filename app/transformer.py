@@ -21,6 +21,9 @@ def transform_crypto_data(api_response):
         transformed_record = {
             "coin": coin_name,
             "price_usd": usd_price,
+            "market_cap": price_data.get("usd_market_cap"),
+            "volume_24h": price_data.get("usd_24h_vol"),
+            "change_24h": price_data.get("usd_24h_change"),
             "timestamp": datetime.now(timezone.utc).isoformat()
             }
 
