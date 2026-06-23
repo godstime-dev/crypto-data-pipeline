@@ -6,7 +6,8 @@ from app.config import (
     API_URL,
     RETRY_COUNT,
     RETRY_BACKOFF_SECONDS,
-    API_MIN_INTERVAL_SECONDS
+    API_MIN_INTERVAL_SECONDS,
+    COINS
     )
 
 
@@ -18,8 +19,11 @@ def fetch_crypto_prices():
     global _last_api_call
 
     params = {
-        "ids": "bitcoin,ethereum",
-        "vs_currencies": "usd"
+        "ids": ",".join(COINS),
+        "vs_currencies": "usd",
+        "include_market_cap": "true",
+        "include_24hr_vol": "true",
+        "include_24hr_change": "true"
         }
 
     # RATE LIMIT PROTECTION
