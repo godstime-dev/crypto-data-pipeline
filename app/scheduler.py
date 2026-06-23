@@ -1,7 +1,7 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 from threading import Lock
 
-from app.config import SLEEP_INTERVAL_SECONDS
+from app.config import CANDLE_INTERVAL_HOURS
 from app.pipeline import run_pipeline
 from app.monitor import log_info, log_error
 
@@ -36,12 +36,12 @@ def start_scheduler():
     scheduler.add_job(
         safe_run_pipeline,
         "interval",
-        seconds=SLEEP_INTERVAL_SECONDS,
+        hours=CANDLE_INTERVAL_HOURS,
         max_instances=1,
         coalesce=True
         )
 
-    log_info(f"Scheduler started - running every {SLEEP_INTERVAL_SECONDS} seconds")
+    log_info(f"Scheduler started - running every {CANDLE_INTERVAL_HOURS} hours")
 
     try:
         scheduler.start()
