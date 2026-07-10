@@ -14,6 +14,7 @@ env/
 
 # Database files
 *.db
+*.duckdb
 
 # Logs
 logs/
