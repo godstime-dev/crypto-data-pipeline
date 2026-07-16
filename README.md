@@ -30,39 +30,11 @@ This project demonstrates a production-style ETL architecture with scheduling, v
 
 # Tech Stack
 - Python 3.x
-- SQLite (local persistence)
+- DuckDB (local persistence)
 - APScheduler (task scheduling)
 - Requests (API communication)
 - Discord Webhooks (notifications)
 - Standard Library (threading, logging, datetime)
-
----
-
-# Project Structure
-```crypto-pipeline/
-│
-├── app/
-│   ├── collector.py
-│   ├── validator.py
-│   ├── transformer.py
-│   ├── pipeline.py
-│   ├── trends.py
-│   ├── database.py
-│   ├── scheduler.py
-│   ├── monitor.py
-│   ├── pipeline_launcher.py
-│   └── config.py
-│
-├── data/
-│   └── crypto.db
-│
-├── logs/
-│   └── pipeline.log
-│
-├── launch.py
-├── requirements.txt
-└── README.md
-```
 
 ---
 
