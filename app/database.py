@@ -135,3 +135,20 @@ def get_latest_market_snapshots():
         }
         for row in rows
         ]
+
+def get_volume_history(coin, limit=20):
+    """
+    Returns recent volume history for a coin.
+    Used for volume surge analysis.
+    """
+    with duckdb.connect(DB_NAME) as conn:
+        rows = conn.execute("""
+            SELECT volume_24h
+            FROM market_data
+            WHERE coin = $1
+            AND volume_24h IS NOT NULL
+            ORDER BY timestamp DESC
+            LIMIT $2
+            """, (coin, limit)).fetchall()
+
+    return [row[0] for row in rows][::-1]
