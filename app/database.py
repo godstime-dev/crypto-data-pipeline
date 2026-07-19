@@ -100,3 +100,38 @@ def get_recent_prices(coin, limit=5):
         ).fetchall()
 
     return [row[0] for row in rows][::-1]
+
+def get_latest_market_snapshots():
+    """
+    Returns the latest market record for every tracked coin
+    """
+    with duckdb.connect(DB_NAME) as conn:
+        rows = conn.execute("""
+            SELECT
+                coin,
+                price_usd,
+                market_cap,
+                volume_24h,
+                change_24h,
+                timestamp
+            FROM (
+                SELECT *,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY coin
+                        ORDER BY timestamp DESC)
+                    AS rn
+                FROM market_data)
+            WHERE rn = 1
+            ORDER BY coin
+                            """).fetchall()
+    return [
+        {
+            "coin": row[0],
+            "price_usd": row[1],
+            "market_cap": row[2],
+            "volume_24h": row[3],
+            "change_24h": row[4],
+            "timestamp": row[5],
+        }
+        for row in rows
+        ]
